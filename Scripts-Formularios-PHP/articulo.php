@@ -13,7 +13,7 @@ $contrasena = "Abcd1234.";
 $base_de_datos = "stashmotor";
 $conexion = mysqli_connect($host, $usuario, $contrasena, $base_de_datos);
 
-// Verificar si la conexión fue exitosa
+// Verificar si la conexión fue exitosa.
 if (!$conexion) {
     die("Error de conexión: " . mysqli_connect_error());
 }
