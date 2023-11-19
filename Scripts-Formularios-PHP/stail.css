@@ -1,0 +1,179 @@
+/* Reset de estilos para evitar inconsistencias entre navegadores */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilo para el cuerpo de la página */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilo para el encabezado */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+}
+
+/* Estilo para el logotipo en el encabezado */
+.logo {
+    width: 100px;
+    height: auto;
+    margin-right: 10px; /* Espacio entre el logotipo y el texto */
+}
+
+/* Estilo para el título del encabezado */
+h1 {
+    margin: 0;
+}
+
+/* Estilo para el menú de navegación */
+.menu {
+    background-color: #444;
+    overflow: hidden;
+}
+
+.menu a {
+    float: left;
+    display: block;
+    color: #fff;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.menu a:hover {
+    background-color: #555;
+}
+
+/* Estilo para el contenedor principal */
+#container {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para el formulario */
+form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 20px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+
+input[type="submit"] {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #555;
+}
+
+/* Estilo para mensajes de error o éxito */
+p {
+    color: rgb(173, 7, 7);
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+h2 {
+    text-align: center;
+}
+
+#container {
+    text-align: center;
+    margin: 20px;
+}
+
+/* Estilos específicos para el formulario de cliente */
+form {
+    width: 50%;
+    margin: 0 auto;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para etiquetas y campos de formulario */
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input {
+    display: block;
+    width: 100%; /* Hace que el campo de entrada ocupe todo el ancho del contenedor */
+    margin-bottom: 10px;
+    padding: 8px; 
+}
+
+input[type="submit"] {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Estilos para el botón de cerrar sesión */
+#cerrar_sesion_btn {
+    background-color: #d9534f;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px; /* Espaciado superior */
+}
+
+.result-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.result-table th, .result-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.result-table th {
+    background-color: #f2f2f2;
+}
+
+.result-table tbody tr:hover {
+    background-color: #f5f5f5;
+}
