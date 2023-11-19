@@ -64,7 +64,7 @@ mysqli_close($conexion);
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="stail.css">
     <style>
-        /* Añade estilos específicos para el formulario de inicio de sesión */
+       
         #container {
             text-align: center;
         }
@@ -75,32 +75,31 @@ mysqli_close($conexion);
         }
 
         label {
-            display: block; /* Muestra las etiquetas en líneas separadas */
-            margin-bottom: 5px; /* Espacio inferior entre etiquetas y campos de entrada */
+            display: block; 
+            margin-bottom: 5px; 
         }
 
         input[type="text"],
         input[type="password"] {
-            width: 100%; /* Ocupa el ancho completo del contenedor */
-            padding: 8px; /* Ajusta el relleno para una apariencia más limpia */
-            margin-bottom: 10px; /* Espacio inferior entre campos de entrada */
-        }
+            width: 100%; 
+            padding: 8px; 
+            margin-bottom: 10px; 
 
         input[type="submit"] {
-            width: 100%; /* Ocupa el ancho completo del contenedor */
-            padding: 10px; /* Ajusta el relleno para una apariencia más limpia */
-            background-color: #B5B2B2; /* Color de fondo verde */
-            color: black; /* Color del texto blanco */
-            border: none; /* Sin borde */
-            cursor: pointer; /* Cursor de puntero al pasar sobre el botón */
+            width: 100%; 
+            padding: 10px; 
+            background-color: #B5B2B2; 
+            color: black;
+            border: none;
+            cursor: pointer; 
         }
 
         input[type="submit"]:hover {
-            background-color: #808080; /* Cambia el color de fondo al pasar sobre el botón */
+            background-color: #808080; 
         }
 
         p {
-            color: #ff0000; /* Color del texto rojo para mensajes de error */
+            color: #ff0000;
         }
     </style>
 </head>
