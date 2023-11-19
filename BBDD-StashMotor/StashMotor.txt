@@ -1,0 +1,270 @@
+-- --------------------------------------------------------
+-- Host:                         192.168.0.3
+-- Versión del servidor:         11.3.0-MariaDB - mariadb.org binary distribution
+-- SO del servidor:              Win64
+-- HeidiSQL Versión:             12.3.0.6589
+-- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+
+-- Volcando estructura de base de datos para stashmotor
+CREATE DATABASE IF NOT EXISTS `stashmotor` /*!40100 DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci */;
+USE `stashmotor`;
+
+-- Volcando estructura para tabla stashmotor.articulo
+CREATE TABLE IF NOT EXISTS `articulo` (
+  `SKU` int(11) NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(30) NOT NULL,
+  `Descripcion` varchar(50) DEFAULT NULL,
+  `PVP` decimal(10,2) NOT NULL,
+  `Modelo_ID_Modelo` int(11) NOT NULL,
+  PRIMARY KEY (`SKU`),
+  KEY `Modelo_ID_Modelo` (`Modelo_ID_Modelo`),
+  CONSTRAINT `articulo_ibfk_1` FOREIGN KEY (`Modelo_ID_Modelo`) REFERENCES `modelo` (`ID_Modelo`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- La exportación de datos fue deseleccionada.
+
+-- Volcando estructura para tabla stashmotor.articulo_modelo
+CREATE TABLE IF NOT EXISTS `articulo_modelo` (
+  `ID_Relacion` int(11) NOT NULL AUTO_INCREMENT,
+  `Articulo_ID_Articulo` int(11) NOT NULL,
+  `Modelo_ID_Modelo` int(11) NOT NULL,
+  PRIMARY KEY (`ID_Relacion`),
+  KEY `Articulo_ID_Articulo` (`Articulo_ID_Articulo`) USING BTREE,
+  KEY `Modelo_ID_Modelo` (`Modelo_ID_Modelo`) USING BTREE,
+  CONSTRAINT `articulo_modelo_ibfk_1` FOREIGN KEY (`Articulo_ID_Articulo`) REFERENCES `articulo` (`SKU`),
+  CONSTRAINT `articulo_modelo_ibfk_2` FOREIGN KEY (`Modelo_ID_Modelo`) REFERENCES `modelo` (`ID_Modelo`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- La exportación de datos fue deseleccionada.
+
+-- Volcando estructura para tabla stashmotor.cargo
+CREATE TABLE IF NOT EXISTS `cargo` (
+  `ID_Cargo` int(11) NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(30) NOT NULL,
+  `Descripcion_Cargo` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`ID_Cargo`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- La exportación de datos fue deseleccionada.
+
+-- Volcando estructura para tabla stashmotor.categoria
+CREATE TABLE IF NOT EXISTS `categoria` (
+  `ID_Categoria` int(11) NOT NULL,
+  `Nombre` varchar(30) NOT NULL,
+  PRIMARY KEY (`ID_Categoria`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- La exportación de datos fue deseleccionada.
+
+-- Volcando estructura para tabla stashmotor.cliente
+CREATE TABLE IF NOT EXISTS `cliente` (
+  `DNI` varchar(11) NOT NULL,
+  `Nombre` varchar(100) NOT NULL,
+  `Apellido` varchar(100) NOT NULL,
+  `Telefono` varchar(15) DEFAULT NULL,
+  `Direccion` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`DNI`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- La exportación de datos fue deseleccionada.
+
+-- Volcando estructura para tabla stashmotor.departamento
+CREATE TABLE IF NOT EXISTS `departamento` (
+  `ID_Departamento` int(11) NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(30) NOT NULL,
+  PRIMARY KEY (`ID_Departamento`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- La exportación de datos fue deseleccionada.
+
+-- Volcando estructura para tabla stashmotor.departamento_cargo
+CREATE TABLE IF NOT EXISTS `departamento_cargo` (
+  `ID_DepartamentoCargo` int(11) NOT NULL AUTO_INCREMENT,
+  `Departamento_ID_Departamento` int(11) NOT NULL,
+  `Cargo_ID_Cargo` int(11) NOT NULL,
+  PRIMARY KEY (`ID_DepartamentoCargo`),
+  KEY `Departamento_ID_Departamento` (`Departamento_ID_Departamento`),
+  KEY `Cargo_ID_Cargo` (`Cargo_ID_Cargo`),
+  CONSTRAINT `departamento_cargo_ibfk_1` FOREIGN KEY (`Departamento_ID_Departamento`) REFERENCES `departamento` (`ID_Departamento`),
+  CONSTRAINT `departamento_cargo_ibfk_2` FOREIGN KEY (`Cargo_ID_Cargo`) REFERENCES `cargo` (`ID_Cargo`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- La exportación de datos fue deseleccionada.
+
+-- Volcando estructura para tabla stashmotor.detalle_venta
+CREATE TABLE IF NOT EXISTS `detalle_venta` (
+  `ID_DV` int(11) NOT NULL AUTO_INCREMENT,
+  `Cantidad` decimal(28,0) NOT NULL,
+  PRIMARY KEY (`ID_DV`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- La exportación de datos fue deseleccionada.
+
+-- Volcando estructura para tabla stashmotor.efectivo
+CREATE TABLE IF NOT EXISTS `efectivo` (
+  `ID_Mod` int(11) NOT NULL,
+  `ID_Efectivo` int(11) NOT NULL AUTO_INCREMENT,
+  `Cantidad` decimal(10,2) NOT NULL,
+  PRIMARY KEY (`ID_Efectivo`),
+  KEY `ID_Mod` (`ID_Mod`),
+  CONSTRAINT `efectivo_ibfk_1` FOREIGN KEY (`ID_Mod`) REFERENCES `modalidad_pago` (`ID_Mod`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- La exportación de datos fue deseleccionada.
+
+-- Volcando estructura para tabla stashmotor.empleado
+CREATE TABLE IF NOT EXISTS `empleado` (
+  `ID_Empleado` int(11) NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(30) NOT NULL,
+  `Apellido` varchar(30) NOT NULL,
+  `Fecha_Ingreso` date DEFAULT NULL,
+  `Correo_Electronico` varchar(30) DEFAULT NULL,
+  `Telefono` varchar(20) DEFAULT NULL,
+  `Cargo_ID_Cargo` int(11) NOT NULL,
+  `Departamento_ID_Departamento` int(11) NOT NULL,
+  PRIMARY KEY (`ID_Empleado`),
+  KEY `Cargo_ID_Cargo` (`Cargo_ID_Cargo`),
+  CONSTRAINT `empleado_ibfk_1` FOREIGN KEY (`Cargo_ID_Cargo`) REFERENCES `cargo` (`ID_Cargo`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- La exportación de datos fue deseleccionada.
+
+-- Volcando estructura para tabla stashmotor.fabricante
+CREATE TABLE IF NOT EXISTS `fabricante` (
+  `ID_Fabricante` int(11) NOT NULL,
+  `Nombre` varchar(30) NOT NULL,
+  PRIMARY KEY (`ID_Fabricante`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- La exportación de datos fue deseleccionada.
+
+-- Volcando estructura para tabla stashmotor.localidad
+CREATE TABLE IF NOT EXISTS `localidad` (
+  `ID_Localidad` int(11) NOT NULL,
+  `Nombre` varchar(30) NOT NULL,
+  `Pais_ISO` varchar(20) NOT NULL,
+  PRIMARY KEY (`ID_Localidad`),
+  KEY `Pais_ISO` (`Pais_ISO`),
+  CONSTRAINT `localidad_ibfk_1` FOREIGN KEY (`Pais_ISO`) REFERENCES `pais` (`ISO`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- La exportación de datos fue deseleccionada.
+
+-- Volcando estructura para tabla stashmotor.modalidad_pago
+CREATE TABLE IF NOT EXISTS `modalidad_pago` (
+  `ID_Mod` int(11) NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(30) NOT NULL,
+  PRIMARY KEY (`ID_Mod`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- La exportación de datos fue deseleccionada.
+
+-- Volcando estructura para tabla stashmotor.modelo
+CREATE TABLE IF NOT EXISTS `modelo` (
+  `ID_Modelo` int(11) NOT NULL,
+  `Nombre` varchar(30) NOT NULL,
+  `Fecha_Fabricacion` date DEFAULT NULL,
+  `Categoria_ID_Categoria` int(11) NOT NULL,
+  `Fabricante_ID_Fabricante` int(11) NOT NULL,
+  PRIMARY KEY (`ID_Modelo`),
+  KEY `Categoria_ID_Categoria` (`Categoria_ID_Categoria`),
+  KEY `Fabricante_ID_Fabricante` (`Fabricante_ID_Fabricante`),
+  CONSTRAINT `modelo_ibfk_1` FOREIGN KEY (`Categoria_ID_Categoria`) REFERENCES `categoria` (`ID_Categoria`),
+  CONSTRAINT `modelo_ibfk_2` FOREIGN KEY (`Fabricante_ID_Fabricante`) REFERENCES `fabricante` (`ID_Fabricante`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- La exportación de datos fue deseleccionada.
+
+-- Volcando estructura para tabla stashmotor.municipio
+CREATE TABLE IF NOT EXISTS `municipio` (
+  `ID_Municipio` int(11) NOT NULL,
+  `Nombre` varchar(30) NOT NULL,
+  `Localidad_ID_Localidad` int(11) NOT NULL,
+  PRIMARY KEY (`ID_Municipio`),
+  KEY `Localidad_ID_Localidad` (`Localidad_ID_Localidad`),
+  CONSTRAINT `municipio_ibfk_1` FOREIGN KEY (`Localidad_ID_Localidad`) REFERENCES `localidad` (`ID_Localidad`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- La exportación de datos fue deseleccionada.
+
+-- Volcando estructura para tabla stashmotor.pais
+CREATE TABLE IF NOT EXISTS `pais` (
+  `ISO` varchar(20) NOT NULL,
+  `Nombre` varchar(30) NOT NULL,
+  PRIMARY KEY (`ISO`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- La exportación de datos fue deseleccionada.
+
+-- Volcando estructura para tabla stashmotor.proveedor
+CREATE TABLE IF NOT EXISTS `proveedor` (
+  `ID_Proveedor` int(11) NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(30) NOT NULL,
+  `Direccion` varchar(100) DEFAULT NULL,
+  `Telefono` varchar(15) DEFAULT NULL,
+  `Pagina_Web` varchar(100) DEFAULT NULL,
+  `Correo_Electronico` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`ID_Proveedor`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- La exportación de datos fue deseleccionada.
+
+-- Volcando estructura para tabla stashmotor.tarjeta
+CREATE TABLE IF NOT EXISTS `tarjeta` (
+  `ID_Mod` int(11) NOT NULL,
+  `ID_Tarjeta` int(11) NOT NULL AUTO_INCREMENT,
+  `Numero_Tarjeta` varchar(4) NOT NULL,
+  `Fecha_Expiracion` date NOT NULL,
+  PRIMARY KEY (`ID_Tarjeta`),
+  KEY `ID_Mod` (`ID_Mod`),
+  CONSTRAINT `tarjeta_ibfk_1` FOREIGN KEY (`ID_Mod`) REFERENCES `modalidad_pago` (`ID_Mod`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- La exportación de datos fue deseleccionada.
+
+-- Volcando estructura para tabla stashmotor.usuario
+CREATE TABLE IF NOT EXISTS `usuario` (
+  `ID_Usuario` int(11) NOT NULL AUTO_INCREMENT,
+  `NombreUsuario` varchar(50) NOT NULL,
+  `ContrasenaHash` varchar(255) NOT NULL,
+  `ID_Departamento` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID_Usuario`),
+  KEY `ID_Departamento` (`ID_Departamento`),
+  CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`ID_Departamento`) REFERENCES `departamento` (`ID_Departamento`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- La exportación de datos fue deseleccionada.
+
+-- Volcando estructura para tabla stashmotor.venta
+CREATE TABLE IF NOT EXISTS `venta` (
+  `ID_Venta` int(11) NOT NULL AUTO_INCREMENT,
+  `Fecha_Venta` date NOT NULL,
+  `Cliente_DNI` varchar(11) NOT NULL,
+  `Empleado_ID_Empleado` int(11) NOT NULL,
+  `Modalidad_Pago_ID_Mod` int(11) NOT NULL,
+  PRIMARY KEY (`ID_Venta`),
+  KEY `Cliente_DNI` (`Cliente_DNI`),
+  KEY `Empleado_ID_Empleado` (`Empleado_ID_Empleado`),
+  KEY `Modalidad_Pago_ID_Mod` (`Modalidad_Pago_ID_Mod`),
+  CONSTRAINT `venta_ibfk_1` FOREIGN KEY (`Cliente_DNI`) REFERENCES `cliente` (`DNI`),
+  CONSTRAINT `venta_ibfk_2` FOREIGN KEY (`Empleado_ID_Empleado`) REFERENCES `empleado` (`ID_Empleado`),
+  CONSTRAINT `venta_ibfk_3` FOREIGN KEY (`Modalidad_Pago_ID_Mod`) REFERENCES `modalidad_pago` (`ID_Mod`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- La exportación de datos fue deseleccionada.
+
+/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
