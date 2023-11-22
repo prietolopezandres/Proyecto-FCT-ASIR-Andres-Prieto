@@ -122,7 +122,7 @@ mysqli_close($conexion);
         <br>
 
         <?php
-        // Muestra mensajes de error o confirmación
+        // Muestra mensajes de error o confirmación.
         if (!empty($mensaje)) {
             echo "<p>$mensaje</p>";
         }
