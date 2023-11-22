@@ -8,7 +8,7 @@ if (!isset($_SESSION["nombre_usuario"])) {
     exit();
 }
 
-// Establecer la conexión a la base de datos
+// Establecer la conexión a la base de datos.
 $host = "192.168.0.3";
 $usuario = "root";
 $contrasena = "Abcd1234.";
