@@ -55,7 +55,7 @@ if ($resultado_modelos) {
     }
 }
 
-// Mensajes de confirmación y error
+// Mensajes de confirmación y error 
 $mensaje = "";
 
 // Procesa el formulario de ingreso de artículos
